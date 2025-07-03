@@ -1,0 +1,20 @@
+{
+  "name": "com.natteens.intellipool",
+  "version": "0.1.0",
+  "displayName": "IntelliPool",
+  "description": "Object Pooling inteligente e otimizado para Unity com m\u00e9tricas de performance\u00a0e\u00a0Jobs\u00a0System.",
+  "keywords": [
+    "Unity",
+    "GameDev",
+    "IntelliPool"
+  ],
+  "author": {
+    "name": "Nathan da Silva Miranda",
+    "email": "natteens.social@gmail.com",
+    "url": "https://github.com/Natteens"
+  },
+  "unity": "2021.3",
+  "documentationUrl": "https://github.com/Natteens/intellipool",
+  "changelogUrl": "https://github.com/Natteens/intellipool/blob/main/CHANGELOG.md",
+  "licensesUrl": "https://github.com/Natteens/intellipool/blob/main/LICENSE.md"
+}
