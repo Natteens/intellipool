@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6afd0db6672b8ec43a22b9afe8a2f689, type: 3}
+  m_Name: PoolDatabase
+  m_EditorClassIdentifier: 
+  enablePoolSystem: 1
+  pools:
+  - poolTag: TestCube
+    prefab: {fileID: 5426278491978663137, guid: 9e3e2d29719923040b08010aa695c097, type: 3}
+    initialSize: 10
+    maxSize: 50
+    preWarm: 1
+    clearOnSceneLoad: 0
+  enableDebugMode: 0
+  useJobsForBatching: 0
+  jobsThreshold: 200
