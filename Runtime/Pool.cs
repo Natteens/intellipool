@@ -517,7 +517,7 @@ namespace IntelliPool
         /// <summary>
         /// Spawna objeto por tipo genérico com posição
         /// </summary>
-        private static T Spawn<T>(Vector3 position) where T : Component
+        public static T Spawn<T>(Vector3 position) where T : Component
         {
             return Spawn<T>(position, Quaternion.identity, null);
         }
@@ -533,7 +533,7 @@ namespace IntelliPool
         /// <summary>
         /// Spawna objeto por tipo genérico com parâmetros completos
         /// </summary>
-        private static T Spawn<T>(Vector3 position, Quaternion rotation, Transform parent) where T : Component
+        public static T Spawn<T>(Vector3 position, Quaternion rotation, Transform parent) where T : Component
         {
             var poolTag = typeof(T).Name;
             var gameObject = SpawnByTag(poolTag, position, rotation, parent);
@@ -543,7 +543,7 @@ namespace IntelliPool
         /// <summary>
         /// Spawna objeto por tag - sobrecargas
         /// </summary>
-        private static GameObject SpawnByTag(string poolTag)
+        public static GameObject SpawnByTag(string poolTag)
         {
             return SpawnByTag(poolTag, Vector3.zero, Quaternion.identity, null);
         }
@@ -561,7 +561,7 @@ namespace IntelliPool
         /// <summary>
         /// Spawna objeto por tag - implementação principal
         /// </summary>
-        private static GameObject SpawnByTag(string poolTag, Vector3 position, Quaternion rotation, Transform parent)
+        public static GameObject SpawnByTag(string poolTag, Vector3 position, Quaternion rotation, Transform parent)
         {
             if (!EnsureSystemReady()) return null;
             if (!ValidateSpawnParameters(poolTag)) return null;
@@ -639,7 +639,7 @@ namespace IntelliPool
         /// <summary>
         /// Retorna objeto para o pool por ID
         /// </summary>
-        private static bool DespawnByID(int instanceID)
+        public static bool DespawnByID(int instanceID)
         {
             if (!EnsureSystemReady()) return false;
 
@@ -730,7 +730,7 @@ namespace IntelliPool
         /// <summary>
         /// Despawna objetos dentro de um raio por tag
         /// </summary>
-        private static void DespawnInRadiusByTag(string poolTag, Vector3 center, float radius)
+        public static void DespawnInRadiusByTag(string poolTag, Vector3 center, float radius)
         {
             if (!EnsureSystemReady()) return;
 
@@ -770,7 +770,7 @@ namespace IntelliPool
         /// <summary>
         /// Obtém quantidade de objetos ativos por tag
         /// </summary>
-        private static int GetActiveCount(string poolTag)
+        public static int GetActiveCount(string poolTag)
         {
             if (!pools.TryGetValue(poolTag, out var container))
                 return 0;
@@ -809,7 +809,7 @@ namespace IntelliPool
         /// <summary>
         /// Lista todas as tags de pools disponíveis
         /// </summary>
-        private static string[] GetAvailablePoolTags()
+        public static string[] GetAvailablePoolTags()
         {
             lock (poolLock)
             {
@@ -839,7 +839,7 @@ namespace IntelliPool
         /// <summary>
         /// PreWarm pool por tag
         /// </summary>
-        private static void PreWarmPool(string poolTag, int count)
+        public static void PreWarmPool(string poolTag, int count)
         {
             if (!EnsureSystemReady() || count <= 0) return;
 
@@ -881,7 +881,7 @@ namespace IntelliPool
         /// <summary>
         /// Limpa pool por tag
         /// </summary>
-        private static void ClearPool(string poolTag)
+        public static void ClearPool(string poolTag)
         {
             if (!EnsureSystemReady()) return;
 
