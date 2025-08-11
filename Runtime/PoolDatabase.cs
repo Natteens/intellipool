@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace IntelliPool
 {
-    [CreateAssetMenu(fileName = "PoolDatabase", menuName = "Pooling/Pool Database")]
+    [CreateAssetMenu(fileName = "PoolDatabase", menuName = "IntelliPool/Pool Database")]
     public class PoolDatabase : ScriptableObject
     {
         [Serializable]
@@ -18,7 +18,7 @@ namespace IntelliPool
             [Tooltip("Quantidade inicial de objetos")]
             public int initialSize;
             
-            [Tooltip("Quantidade máxima de objetos")]
+            [Tooltip("Quantidade máxima de objetos (0 = ilimitado)")]
             public int maxSize;
             
             [Tooltip("Criar objetos na inicialização")]
@@ -38,11 +38,5 @@ namespace IntelliPool
         [Header("Configurações")]
         [Tooltip("Ativa logs detalhados")]
         public bool enableDebugMode;
-        
-        [Tooltip("Usa Jobs System para operações em lote")]
-        public bool useJobsForBatching;
-        
-        [Tooltip("Limite para ativar Jobs System")]
-        public int jobsThreshold = 100;
     }
 }
