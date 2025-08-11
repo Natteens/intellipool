@@ -1,3 +1,10 @@
+## [0.1.1](https://github.com/Natteens/intellipool/compare/v0.1.0...v0.1.1) (2025-08-11)
+
+
+### Bug Fixes
+
+* Replace PoolDatabaseEditor with new PoolManagerWindow ([3e8e015](https://github.com/Natteens/intellipool/commit/3e8e015d865e046fd14d053299d2be0dc59a3ac2))
+
 # 📝 Changelog
 
 Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
