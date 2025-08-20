@@ -1,3 +1,10 @@
+## [0.1.2](https://github.com/Natteens/intellipool/compare/v0.1.1...v0.1.2) (2025-08-20)
+
+
+### Bug Fixes
+
+* Add UNITY_EDITOR guards to editor-specific code ([c077465](https://github.com/Natteens/intellipool/commit/c0774652539cb10963b4737c94fc88c704b18453))
+
 ## [0.1.1](https://github.com/Natteens/intellipool/compare/v0.1.0...v0.1.1) (2025-08-11)
 
 
