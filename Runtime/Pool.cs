@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -92,12 +94,12 @@ namespace IntelliPool
 
         static bool LoadDatabaseFromSavedPath()
         {
+#if UNITY_EDITOR
             databasePath = EditorPrefs.GetString("IntelliPool.DatabasePath", "");
             
             if (string.IsNullOrEmpty(databasePath))
                 return false;
 
-#if UNITY_EDITOR
             var asset = UnityEditor.AssetDatabase.LoadAssetAtPath<PoolDatabase>(databasePath);
             if (asset != null)
             {
@@ -112,8 +114,10 @@ namespace IntelliPool
 
         public static void SetDatabasePath(string path)
         {
+#if UNITY_EDITOR
             databasePath = path;
             EditorPrefs.SetString("IntelliPool.DatabasePath", path);
+#endif
         }
 
         static void CreatePoolRoot()
