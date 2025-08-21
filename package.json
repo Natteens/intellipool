@@ -1,8 +1,8 @@
 {
   "name": "com.natteens.intellipool",
-  "version": "0.1.0",
+  "version": "0.1.3",
   "displayName": "IntelliPool",
-  "description": "Object Pooling inteligente e otimizado para Unity com m\u00e9tricas de performance\u00a0e\u00a0Jobs\u00a0System.",
+  "description": "Object Pooling inteligente e otimizado para Unity com métricas de performance e Jobs System.",
   "keywords": [
     "Unity",
     "GameDev",

@@ -1,3 +1,10 @@
+## [0.1.3](https://github.com/Natteens/intellipool/compare/v0.1.2...v0.1.3) (2025-08-21)
+
+
+### Bug Fixes
+
+* Update semantic-release plugins configuration ([b24a7f6](https://github.com/Natteens/intellipool/commit/b24a7f6ab69e983016a7db4f3893a88380093939))
+
 ## [0.1.2](https://github.com/Natteens/intellipool/compare/v0.1.1...v0.1.2) (2025-08-20)
 
 
