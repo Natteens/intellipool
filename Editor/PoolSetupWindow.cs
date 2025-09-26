@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEditor;
 using System.IO;
@@ -9,7 +10,7 @@ namespace IntelliPool.Editor
         #region Campos Privados
         private static bool hasShownSetup;
         private Vector2 scrollPosition;
-        private string databasePath = "Assets/IntelliPool";
+        private string databasePath = "Assets/Resources/IntelliPool";
         private string databaseName = "PoolDatabase";
         private bool enableDebugMode;
         
@@ -20,16 +21,6 @@ namespace IntelliPool.Editor
         #endregion
 
         #region Inicialização
-        [InitializeOnLoadMethod]
-        static void CheckFirstTime()
-        {
-            if (!hasShownSetup && !HasPoolDatabase())
-            {
-                hasShownSetup = true;
-                ShowSetupWindow();
-            }
-        }
-
         [MenuItem("Tools/IntelliPool/Initial Setup", priority = 1)]
         public static void ShowSetupWindow()
         {
@@ -252,7 +243,7 @@ namespace IntelliPool.Editor
             var database = CreateInstance<PoolDatabase>();
             database.enablePoolSystem = true;
             database.enableDebugMode = enableDebugMode;
-            database.pools = new PoolDatabase.PoolConfiguration[0]; 
+            database.pools = Array.Empty<PoolDatabase.PoolConfiguration>(); 
             
             var assetPath = $"{databasePath}/{databaseName}.asset";
             AssetDatabase.CreateAsset(database, assetPath);
