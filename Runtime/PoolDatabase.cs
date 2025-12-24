@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace IntelliPool
 {
-    [CreateAssetMenu(fileName = "PoolDatabase", menuName = "IntelliPool/Pool Database")]
+    [CreateAssetMenu(fileName = "PoolDatabase", menuName = "Scriptable Objects/IntelliPool/Pool Database")]
     public class PoolDatabase : ScriptableObject
     {
         [Serializable]
