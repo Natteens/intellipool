@@ -1,15 +1,11 @@
 # Basic Sample
 
-Este é um exemplo básico para demonstrar o uso do IntelliPool.
+Cube spawner demonstrating the IntelliPool runtime API.
 
-## Como usar
+## How to use
 
-1. Importe esta amostra através do Package Manager
-2. Abra a cena de exemplo
-3. Execute para ver o IntelliPool em ação
+1. Import this sample through the Package Manager
+2. Open `PooledCubeSpawner.unity`
+3. Enter Play Mode and hold Space to spawn cubes
 
-## Arquivos incluídos
-
-- Cenas básicas de exemplo
-- Prefabs simples
-- Scripts de demonstração básicos
+Cubes are taken with `Pool.Get("TestCube", ...)` and returned with `Pool.ReleaseDelayed`. `TestCube` implements `IPoolable` to reset physics on spawn. The spawner initializes the pool system from the sample `PoolDatabase` via `Pool.Initialize`.
