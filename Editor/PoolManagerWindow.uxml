@@ -1,0 +1,110 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Packages/com.natteens.intellipool/Editor/PoolManagerWindow.uss?fileID=7433441132597879392&amp;guid=a5ee6ca1fb10bbb4a8415d67fddf3ca1&amp;type=3#PoolManagerWindow"/>
+    <ui:VisualElement name="root" class="ip-root">
+        <ui:VisualElement name="header" class="ip-header">
+            <ui:VisualElement name="title-row" class="ip-title-row">
+                <ui:VisualElement name="title-block" class="ip-title-block">
+                    <ui:Label text="IntelliPool" class="ip-title"/>
+                    <ui:Label text="Runtime object pooling database" class="ip-subtitle"/>
+                </ui:VisualElement>
+                <ui:Label name="header-status-badge" text="Checking..." class="ip-status-badge"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="toolbar" class="ip-toolbar">
+                <ui:VisualElement name="database-field-container" class="ip-database-field"/>
+                <ui:Button name="create-button" text="Create" class="ip-button-secondary"/>
+                <ui:Button name="find-button" text="Find" class="ip-button-secondary"/>
+                <ui:Button name="save-button" text="Save" class="ip-button-secondary"/>
+                <ui:Button name="validate-button" text="Validate" class="ip-button-secondary"/>
+                <ui:Button name="refresh-button" text="Refresh" class="ip-button-secondary"/>
+            </ui:VisualElement>
+            <ui:Label name="database-status-label" text="No database selected." class="ip-muted ip-database-status"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="runtime-strip" class="ip-status-strip">
+            <ui:Label text="Runtime Database" class="ip-strip-label"/>
+            <ui:Label name="runtime-path-label" text="Assets/Resources/IntelliPool/PoolDatabase.asset" class="ip-muted ip-strip-path"/>
+            <ui:Label name="runtime-badge" text="Checking..." class="ip-status-badge"/>
+            <ui:VisualElement name="runtime-actions" class="ip-strip-actions">
+                <ui:Button name="create-runtime-default-button" text="Create Runtime Default" class="ip-button-primary"/>
+                <ui:Button name="use-selected-button" text="Use Selected" class="ip-button-secondary"/>
+                <ui:Button name="ping-runtime-button" text="Ping" class="ip-button-ghost"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="runtime-warning-box" class="ip-warning-box ip-hidden">
+            <ui:Label text="This database can be edited here, but Pool.Get(id) will not auto-load it at runtime unless it is moved to Resources or initialized manually."/>
+        </ui:VisualElement>
+        <ui:VisualElement name="main-content" class="ip-content">
+            <ui:VisualElement name="empty-state" class="ip-empty-state ip-hidden">
+                <ui:Label text="No PoolDatabase selected" class="ip-empty-title"/>
+                <ui:Label text="Create a new database, find an existing one, or set up the runtime default." class="ip-muted"/>
+                <ui:VisualElement class="ip-empty-buttons">
+                    <ui:Button name="create-database-button" text="Create Database" class="ip-button-secondary"/>
+                    <ui:Button name="find-database-button" text="Find Database" class="ip-button-secondary"/>
+                    <ui:Button name="create-runtime-default-empty-button" text="Create Runtime Default" class="ip-button-primary"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:TwoPaneSplitView name="workspace" class="ip-content-workspace ip-hidden" fixed-pane-index="0" fixed-pane-initial-dimension="300" orientation="Horizontal">
+                <ui:VisualElement name="sidebar" class="ip-sidebar">
+                    <ui:VisualElement name="sidebar-header" class="ip-sidebar-header">
+                        <ui:Label text="Pool Entries" class="ip-section-header"/>
+                        <ui:Button name="add-button-header" text="Add" class="ip-button-primary ip-button-compact"/>
+                    </ui:VisualElement>
+                    <ui:TextField name="search-field" class="ip-search-field"/>
+                    <ui:ListView name="entries-list" class="ip-entries-list" fixed-item-height="58" virtualization-method="FixedHeight" selection-type="Single" show-border="true" show-bound-collection-size="false" show-add-remove-footer="false" reorderable="true"/>
+                    <ui:VisualElement name="entries-empty" class="ip-empty-state ip-empty-state-compact ip-hidden">
+                        <ui:Label text="No pool entries yet" class="ip-muted"/>
+                        <ui:Button name="add-entry-empty-button" text="Add Entry" class="ip-button-primary"/>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="sidebar-footer" class="ip-sidebar-footer">
+                        <ui:Button name="add-button-footer" text="Add" class="ip-button-secondary"/>
+                        <ui:Button name="duplicate-button" text="Duplicate" class="ip-button-secondary"/>
+                        <ui:Button name="remove-button" text="Remove" class="ip-button-danger"/>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:ScrollView name="details" class="ip-details" mode="Vertical" horizontal-scroller-visibility="Hidden" vertical-scroller-visibility="Auto">
+                    <ui:VisualElement name="details-empty" class="ip-empty-state ip-empty-state-compact ip-hidden">
+                        <ui:Label text="Select a pool entry to edit its details." class="ip-muted"/>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="details-content" class="ip-hidden">
+                        <ui:VisualElement name="identity-card" class="ip-card">
+                            <ui:Label text="Identity" class="ip-card-title"/>
+                            <ui:VisualElement name="identity-fields"/>
+                            <ui:VisualElement class="ip-button-row">
+                                <ui:Button name="auto-id-button" text="Auto Id" class="ip-button-secondary"/>
+                                <ui:Button name="ping-button" text="Ping Prefab" class="ip-button-ghost"/>
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                        <ui:VisualElement name="capacity-card" class="ip-card">
+                            <ui:Label text="Capacity" class="ip-card-title"/>
+                            <ui:VisualElement name="capacity-fields" class="ip-field-row-compact"/>
+                        </ui:VisualElement>
+                        <ui:VisualElement name="behavior-card" class="ip-card">
+                            <ui:Label text="Behavior" class="ip-card-title"/>
+                            <ui:VisualElement name="behavior-fields"/>
+                        </ui:VisualElement>
+                        <ui:VisualElement name="status-card" class="ip-card">
+                            <ui:Label text="Entry Status" class="ip-card-title"/>
+                            <ui:Label name="entry-status-label" text="" class="ip-muted"/>
+                            <ui:VisualElement class="ip-button-row">
+                                <ui:Button name="validate-entry-button" text="Validate Entry" class="ip-button-secondary"/>
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:ScrollView>
+            </ui:TwoPaneSplitView>
+        </ui:VisualElement>
+        <ui:VisualElement name="stats-panel" class="ip-stats">
+            <ui:Label text="Runtime Stats" name="stats-title" class="ip-section-header"/>
+            <ui:Label name="stats-idle" text="Runtime stats are available in Play Mode after pool initialization." class="ip-muted"/>
+            <ui:VisualElement name="stats-table" class="ip-hidden">
+                <ui:VisualElement name="stats-header" class="ip-stats-row ip-stats-header">
+                    <ui:Label text="Id" class="ip-stats-col ip-stats-col-id"/>
+                    <ui:Label text="Active" class="ip-stats-col"/>
+                    <ui:Label text="Inactive" class="ip-stats-col"/>
+                    <ui:Label text="Total" class="ip-stats-col"/>
+                    <ui:Label text="Max" class="ip-stats-col"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="stats-body"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

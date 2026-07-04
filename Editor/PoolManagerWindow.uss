@@ -1,0 +1,451 @@
+.ip-root {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    min-height: 0;
+    min-width: 0;
+    overflow: hidden;
+    padding: 8px 10px;
+}
+
+.ip-hidden {
+    display: none;
+}
+
+.ip-muted {
+    opacity: 0.6;
+    font-size: 11px;
+}
+
+.ip-header {
+    flex-shrink: 0;
+    margin-bottom: 6px;
+}
+
+.ip-title-row {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.ip-title-block {
+    flex-direction: column;
+}
+
+.ip-title {
+    font-size: 16px;
+    -unity-font-style: bold;
+}
+
+.ip-subtitle {
+    font-size: 11px;
+    opacity: 0.6;
+    margin-top: 1px;
+}
+
+.ip-toolbar {
+    flex-direction: row;
+    align-items: center;
+    margin-top: 6px;
+}
+
+.ip-database-field {
+    flex-grow: 1;
+    margin-right: 6px;
+}
+
+.ip-database-status {
+    margin-top: 3px;
+}
+
+.ip-status-badge {
+    -unity-font-style: bold;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 9px;
+    background-color: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.7);
+    align-self: flex-start;
+}
+
+.ip-status-success {
+    background-color: rgba(110, 200, 120, 0.18);
+    color: rgb(140, 220, 150);
+}
+
+.ip-status-warning {
+    background-color: rgba(220, 180, 90, 0.18);
+    color: rgb(230, 195, 110);
+}
+
+.ip-status-error {
+    background-color: rgba(210, 100, 90, 0.2);
+    color: rgb(230, 130, 120);
+}
+
+.ip-status-strip {
+    flex-shrink: 0;
+    flex-direction: row;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.035);
+    border-width: 1px;
+    border-color: rgba(255, 255, 255, 0.08);
+    border-radius: 3px;
+    padding: 5px 8px;
+    margin-bottom: 4px;
+}
+
+.ip-strip-label {
+    -unity-font-style: bold;
+    font-size: 11px;
+    margin-right: 8px;
+}
+
+.ip-strip-path {
+    flex-grow: 1;
+    font-size: 10px;
+    -unity-font-style: italic;
+    white-space: normal;
+    margin-top: 0;
+    margin-right: 8px;
+}
+
+.ip-strip-actions {
+    flex-direction: row;
+}
+
+.ip-warning-box,
+.ip-success-box,
+.ip-error-box {
+    border-radius: 3px;
+    padding: 5px 8px;
+    margin-bottom: 6px;
+    font-size: 11px;
+    white-space: normal;
+}
+
+.ip-warning-box {
+    background-color: rgba(220, 180, 90, 0.12);
+    border-left-width: 3px;
+    border-left-color: rgb(220, 180, 90);
+    color: rgb(230, 195, 110);
+}
+
+.ip-success-box {
+    background-color: rgba(110, 200, 120, 0.12);
+    border-left-width: 3px;
+    border-left-color: rgb(110, 200, 120);
+    color: rgb(140, 220, 150);
+}
+
+.ip-error-box {
+    background-color: rgba(210, 100, 90, 0.12);
+    border-left-width: 3px;
+    border-left-color: rgb(210, 100, 90);
+    color: rgb(230, 130, 120);
+}
+
+.ip-button-primary,
+.ip-button-secondary,
+.ip-button-danger,
+.ip-button-ghost {
+    margin: 0 0 0 4px;
+    padding: 3px 10px;
+    border-radius: 3px;
+    font-size: 11px;
+}
+
+.ip-button-compact {
+    padding: 2px 8px;
+    margin-left: 8px;
+}
+
+.ip-button-primary {
+    background-color: rgb(64, 128, 210);
+    color: rgb(255, 255, 255);
+    border-width: 0;
+    -unity-font-style: bold;
+}
+
+.ip-button-secondary {
+    background-color: rgba(255, 255, 255, 0.06);
+    border-width: 1px;
+    border-color: rgba(255, 255, 255, 0.14);
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.ip-button-danger {
+    background-color: rgba(200, 80, 70, 0.85);
+    color: rgb(255, 255, 255);
+    border-width: 0;
+}
+
+.ip-button-ghost {
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.ip-button-row {
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 4px;
+}
+
+.ip-content {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    min-height: 0;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.ip-content-workspace {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    min-height: 0;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.ip-sidebar {
+    min-width: 280px;
+    max-width: 360px;
+    flex-shrink: 0;
+    flex-direction: column;
+    min-height: 0;
+    min-width: 0;
+    height: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    border-right-width: 1px;
+    border-right-color: rgba(255, 255, 255, 0.08);
+    padding-right: 8px;
+    margin-right: 8px;
+}
+
+.ip-sidebar-header {
+    flex-shrink: 0;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
+
+.ip-section-header {
+    -unity-font-style: bold;
+    font-size: 11px;
+    opacity: 0.85;
+}
+
+.ip-search-field {
+    flex-shrink: 0;
+    margin-bottom: 4px;
+}
+
+.ip-entries-list {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    min-height: 0;
+    min-width: 0;
+    max-height: 100%;
+    overflow: hidden;
+}
+
+.ip-entries-list .unity-collection-view__scroll-view {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    min-height: 0;
+    min-width: 0;
+    max-height: 100%;
+    overflow: hidden;
+}
+
+.ip-entries-list .unity-scroll-view__content-and-vertical-scroll-container {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    min-height: 0;
+    min-width: 0;
+    max-height: 100%;
+    overflow: hidden;
+}
+
+.ip-entries-list .unity-scroll-view__content-viewport {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    min-height: 0;
+    min-width: 0;
+    max-height: 100%;
+    overflow: hidden;
+}
+
+.ip-sidebar-footer {
+    flex-direction: row;
+    justify-content: flex-end;
+    flex-shrink: 0;
+    margin-top: 4px;
+}
+
+.ip-details {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    min-width: 0;
+    min-height: 0;
+    max-height: 100%;
+    overflow: hidden;
+}
+
+.ip-entry-row {
+    flex-direction: column;
+    justify-content: center;
+    padding: 4px 6px;
+    border-left-width: 3px;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-bottom-width: 1px;
+    border-bottom-color: rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+}
+
+.ip-entry-row-selected {
+    background-color: rgba(80, 140, 220, 0.12);
+}
+
+.ip-entry-row-invalid {
+    border-left-color: rgb(196, 92, 80);
+}
+
+.ip-entry-title {
+    -unity-font-style: bold;
+    font-size: 12px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.ip-entry-subtitle {
+    opacity: 0.6;
+    font-size: 10px;
+    -unity-font-style: italic;
+    margin-top: 1px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.ip-entry-meta {
+    opacity: 0.5;
+    font-size: 9px;
+    margin-top: 1px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.ip-card {
+    background-color: rgba(255, 255, 255, 0.03);
+    border-width: 1px;
+    border-color: rgba(255, 255, 255, 0.08);
+    border-radius: 3px;
+    padding: 8px;
+    margin-bottom: 6px;
+}
+
+.ip-card-title {
+    -unity-font-style: bold;
+    font-size: 11px;
+    opacity: 0.8;
+    margin-bottom: 4px;
+}
+
+.ip-details .unity-base-field__label {
+    min-width: 108px;
+}
+
+.ip-field-row {
+    margin-bottom: 2px;
+}
+
+.ip-field-row-compact {
+    flex-direction: row;
+}
+
+.ip-field-row-compact-item {
+    flex-grow: 1;
+    flex-basis: 0;
+    margin-right: 6px;
+}
+
+.ip-field-row-compact-item-last {
+    margin-right: 0;
+}
+
+.ip-field-label {
+    font-size: 10px;
+    opacity: 0.7;
+    margin-bottom: 1px;
+}
+
+.ip-field-control {
+    flex-grow: 1;
+}
+
+.ip-empty-state {
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.ip-empty-state-compact {
+    flex-grow: 0;
+    padding: 16px 8px;
+}
+
+.ip-empty-title {
+    -unity-font-style: bold;
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+.ip-empty-buttons {
+    flex-direction: row;
+    margin-top: 8px;
+}
+
+.ip-stats {
+    flex-shrink: 0;
+    margin-top: 6px;
+    border-top-width: 1px;
+    border-top-color: rgba(255, 255, 255, 0.08);
+    padding-top: 6px;
+}
+
+.ip-stats-row {
+    flex-direction: row;
+    padding: 2px 0;
+}
+
+.ip-stats-header {
+    opacity: 0.6;
+    border-bottom-width: 1px;
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+    margin-bottom: 2px;
+}
+
+.ip-stats-col {
+    flex-grow: 1;
+    flex-basis: 0;
+    font-size: 10px;
+}
+
+.ip-stats-col-id {
+    flex-grow: 2;
+    -unity-font-style: bold;
+}

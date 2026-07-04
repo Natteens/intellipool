@@ -394,14 +394,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c335e0ab11ee894894731897ff9df95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  database: {fileID: 11400000, guid: 8639f092640bd2b46936e01822a03116, type: 2}
   spawnForce: 500
   spawnHeight: 2
-  despawnTime: 1.5
+  releaseDelay: 1.5
   spawnRadius: 3
-  useSpawnRate: 1
   spawnRate: 0.15
-  showDebugInfo: 1
-  showJobsStats: 1
 --- !u!4 &1632685471
 Transform:
   m_ObjectHideFlags: 0

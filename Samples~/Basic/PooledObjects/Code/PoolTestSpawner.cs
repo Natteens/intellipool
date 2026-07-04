@@ -1,80 +1,57 @@
-using GameInit.PooledObjects;
+using IntelliPool;
 using UnityEngine;
 
 public class PoolTestSpawner : MonoBehaviour
 {
-    [Header("Configurações de Spawn")]
     [SerializeField] private float spawnForce = 500f;
     [SerializeField] private float spawnHeight = 2f;
-    [SerializeField] private float despawnTime = 5f;
+    [SerializeField] private float releaseDelay = 1.5f;
     [SerializeField] private float spawnRadius = 3f;
-    
-    [Header("Controle de Taxa (Opcional)")]
-    [SerializeField] private bool useSpawnRate;
-    [SerializeField] private float spawnRate;
-    private float lastSpawnTime;
+    [SerializeField] private bool autoSpawnOnStart;
+    [SerializeField] private float spawnEverySeconds = 0.15f;
 
-    [Header("Debug")]
-    [SerializeField] private bool showDebugInfo = true;
-    [SerializeField] private bool showJobsStats = true;
-
-    void Update()
+    void Start()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (autoSpawnOnStart)
+            _ = AutoSpawnLoop();
+    }
+
+    async Awaitable AutoSpawnLoop()
+    {
+        try
         {
-            if (!useSpawnRate || CanSpawn())
+            while (autoSpawnOnStart)
             {
-                SpawnCube();
+                SpawnOnce();
+                await Awaitable.WaitForSecondsAsync(spawnEverySeconds, destroyCancellationToken);
             }
         }
+        catch (System.OperationCanceledException) { }
     }
-    
-    bool CanSpawn()
+
+    [ContextMenu("Spawn Once")]
+    public void SpawnOnce()
     {
-        return Time.time >= lastSpawnTime + spawnRate;
-    }
-    void SpawnCube()
-    {
-        Vector3 randomOffset = new Vector3(
+        var offset = new Vector3(
             Random.Range(-spawnRadius, spawnRadius),
             spawnHeight,
-            Random.Range(-spawnRadius, spawnRadius)
-        );
+            Random.Range(-spawnRadius, spawnRadius));
 
-        Vector3 spawnPosition = transform.position + randomOffset;
-        GameObject cube = Pool.SpawnByTag("TestCube", spawnPosition, Quaternion.identity);
+        var cube = Pool.Get("TestCube", transform.position + offset);
+        if (cube == null) return;
 
-        if (cube != null)
+        if (cube.TryGetComponent(out Rigidbody rb))
         {
-            if (useSpawnRate)
-            {
-                lastSpawnTime = Time.time;
-            }
-            
-            Rigidbody rb = cube.GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                Vector3 forceDirection = new Vector3(
-                    Random.Range(-100f, 100f),
-                    spawnForce,
-                    Random.Range(-100f, 100f)
-                );
-                rb.AddForce(forceDirection);
-
-                Vector3 torque = new Vector3(
-                    Random.Range(-50f, 50f),
-                    Random.Range(-50f, 50f),
-                    Random.Range(-50f, 50f)
-                );
-                rb.AddTorque(torque);
-            }
-
-            Pool.DespawnDelayed(cube, despawnTime);
-            Debug.Log($"Cubo spawnado! Total ativo: {Pool.GetActiveCount("TestCube")}");
+            rb.AddForce(new Vector3(Random.Range(-100f, 100f), spawnForce, Random.Range(-100f, 100f)));
+            rb.AddTorque(new Vector3(Random.Range(-50f, 50f), Random.Range(-50f, 50f), Random.Range(-50f, 50f)));
         }
-        else
-        {
-            Debug.LogWarning("Falha ao spawnar cubo - Pool pode estar no limite!");
-        }
+
+        Pool.ReleaseDelayed(cube, releaseDelay);
+    }
+
+    public void SpawnBurst(int count)
+    {
+        for (int i = 0; i < count; i++)
+            SpawnOnce();
     }
 }

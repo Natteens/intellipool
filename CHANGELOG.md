@@ -1,3 +1,12 @@
+# [1.0.0](https://github.com/Natteens/intellipool/compare/v0.1.3...v1.0.0) (2026-07-03)
+
+### BREAKING CHANGES
+
+* Runtime rewritten on top of UnityEngine.Pool.ObjectPool<T>. Old static Pool API (SpawnByTag/Despawn/DespawnDelayed), PoolContainer and PoolableObject removed. New API: Pool.Get / Pool.Release / Pool.ReleaseDelayed delegating to a PoolService instance.
+* PoolDatabase reshaped: PoolConfiguration[] pools -> List<PoolEntry> entries (id, prefab, prewarmCount, defaultCapacity, maxSize, collectionCheck, clearOnSceneLoad, containerName). enablePoolSystem, useJobsForBatching and jobsThreshold removed.
+* IMGUI PoolSetupWindow/PoolManagerWindow replaced by a single UI Toolkit Pool Manager window.
+* EditorPrefs database path removed; default database is loaded from Resources/IntelliPool/PoolDatabase or set manually via Pool.Initialize / PoolService.
+
 ## [0.1.3](https://github.com/Natteens/intellipool/compare/v0.1.2...v0.1.3) (2025-08-21)
 
 
