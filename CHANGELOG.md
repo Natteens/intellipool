@@ -1,3 +1,15 @@
+# [1.0.0](https://github.com/Natteens/intellipool/compare/v0.1.3...v1.0.0) (2026-07-04)
+
+
+* feat!: rewrite runtime around UnityEngine.Pool.ObjectPool ([58e5d6d](https://github.com/Natteens/intellipool/commit/58e5d6df6a7ef409d596eedec9c94a9e0d012d49))
+
+
+### BREAKING CHANGES
+
+* SpawnByTag/Despawn/DespawnDelayed removed in favor of
+Get/Release/ReleaseDelayed. PoolDatabase reshaped to List<PoolEntry>.
+EditorPrefs database path removed.
+
 # [1.0.0](https://github.com/Natteens/intellipool/compare/v0.1.3...v1.0.0) (2026-07-03)
 
 ### BREAKING CHANGES
