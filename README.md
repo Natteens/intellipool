@@ -20,13 +20,16 @@ Or in `Packages/manifest.json`:
 }
 ```
 
-Requires Unity 2021.3+.
+Requires Unity 2023.1+ (uses `Awaitable` for delayed release).
 
 ## Quick start
 
-1. Open **Tools -> IntelliPool -> Pool Manager** and click **Create** (creates a `PoolDatabase` at `Assets/Resources/IntelliPool/PoolDatabase.asset`), or use **Assets -> Create -> IntelliPool -> Pool Database**.
-2. Add an entry: assign a prefab (the id auto-fills from the prefab name), set prewarm/capacity/max size.
-3. Spawn and release from code - no scene setup required:
+For zero-scene-setup usage, create the runtime default database:
+
+1. Open **Tools -> IntelliPool -> Pool Manager**.
+2. In the **Runtime Database** card, click **Create Runtime Default**. This creates a `PoolDatabase` at `Assets/Resources/IntelliPool/PoolDatabase.asset` (the folder is created automatically if needed).
+3. Add an entry: assign a prefab (**Auto Id From Prefab** fills the id from the prefab name), set prewarm/capacity/max size.
+4. Spawn and release from code - no scene setup required:
 
 ```csharp
 using IntelliPool;
@@ -39,6 +42,8 @@ Pool.Release(bullet);
 ```
 
 On first use, `Pool` creates a hidden `DontDestroyOnLoad` `PoolService` and loads the default database from `Resources/IntelliPool/PoolDatabase` (falls back to any `PoolDatabase` in a `Resources` folder).
+
+If you already have a `PoolDatabase` asset elsewhere, either move it into a `Resources` folder yourself, or select it in the Pool Manager and click **Use Selected As Runtime Default** to move it to the canonical runtime path automatically. The Runtime Database card always shows whether a runtime-loadable database currently exists.
 
 ## PoolDatabase
 
@@ -116,12 +121,19 @@ public class Enemy : MonoBehaviour, IPoolable
 
 ## Editor
 
-**Tools -> IntelliPool -> Pool Manager** (UI Toolkit): create/assign a database, edit entries, validate duplicate ids and missing prefabs, and view per-pool stats in Play Mode.
+**Tools -> IntelliPool -> Pool Manager** (UI Toolkit, UXML/USS):
+
+- **Toolbar** - assign/create/find/save the database being edited, validate it.
+- **Runtime Database card** - shows whether a database exists at the runtime default path (`Assets/Resources/IntelliPool/PoolDatabase.asset`), with buttons to create it, promote the currently selected database to that path, ping it, or re-validate it.
+- **Validation card** - status for the database currently being edited (entry count, problems found).
+- **Pool Entries panel** - searchable list of entries (id, prefab name, prewarm/max, invalid marker), with Add/Remove/Duplicate.
+- **Entry Details panel** - selected entry grouped into Identity, Prewarm & Capacity, and Behavior fields, with Auto Id From Prefab, Ping Prefab, and Validate Entry.
+- **Runtime Stats panel** - per-pool active/pooled/total/max counts, refreshed every 500ms in Play Mode.
 
 ## Performance notes
 
 - Backend is `UnityEngine.Pool.ObjectPool<T>`; after prewarm there are no `Instantiate`/`Destroy` calls during gameplay (until `maxSize` overflow or `Clear`).
-- No LINQ, reflection, or per-frame allocations in the runtime hot paths. `ReleaseDelayed` allocates a small coroutine per call.
+- No LINQ, reflection, or per-frame allocations in the runtime hot paths. `ReleaseDelayed` uses `Awaitable.WaitForSecondsAsync`, no coroutines.
 - Release uses the `PooledObject` handle directly - no id or instance-id lookups.
 - Double release is ignored with a warning in editor/development builds and returns `false`; `collectionCheck` adds a second guard inside the Unity pool.
 - Don't `Destroy` pooled instances manually - use `Release`, `ReleaseAll` or `Clear`.

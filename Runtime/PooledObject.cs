@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 namespace IntelliPool
@@ -8,7 +7,7 @@ namespace IntelliPool
     {
         PoolService service;
         IPoolable[] poolables;
-        Coroutine delayed;
+        int releaseDelayVersion;
 
         internal PoolBucket Bucket { get; private set; }
 
@@ -45,22 +44,17 @@ namespace IntelliPool
                 Release();
                 return;
             }
-            CancelScheduledRelease();
-            delayed = StartCoroutine(DelayedRelease(delay));
+            _ = DelayedReleaseAsync(delay);
         }
 
-        internal void CancelScheduledRelease()
-        {
-            if (delayed == null) return;
-            StopCoroutine(delayed);
-            delayed = null;
-        }
+        internal void CancelScheduledRelease() => releaseDelayVersion++;
 
-        IEnumerator DelayedRelease(float delay)
+        async Awaitable DelayedReleaseAsync(float delay)
         {
-            yield return new WaitForSeconds(delay);
-            delayed = null;
-            Release();
+            int version = ++releaseDelayVersion;
+            await Awaitable.WaitForSecondsAsync(delay);
+            if (version != releaseDelayVersion) return;
+            if (IsSpawned) Release();
         }
 
         internal void MarkSpawned() => IsSpawned = true;

@@ -3,28 +3,34 @@ using UnityEngine;
 
 public class PoolTestSpawner : MonoBehaviour
 {
-    [SerializeField] private PoolDatabase database;
     [SerializeField] private float spawnForce = 500f;
     [SerializeField] private float spawnHeight = 2f;
     [SerializeField] private float releaseDelay = 1.5f;
     [SerializeField] private float spawnRadius = 3f;
-    [SerializeField] private float spawnRate = 0.15f;
+    [SerializeField] private bool autoSpawnOnStart;
+    [SerializeField] private float spawnEverySeconds = 0.15f;
 
-    private float lastSpawnTime;
-
-    void Awake()
+    void Start()
     {
-        if (database != null && !Pool.IsReady)
-            Pool.Initialize(database);
+        if (autoSpawnOnStart)
+            _ = AutoSpawnLoop();
     }
 
-    void Update()
+    async Awaitable AutoSpawnLoop()
     {
-        if (Input.GetKey(KeyCode.Space) && Time.time >= lastSpawnTime + spawnRate)
-            SpawnCube();
+        try
+        {
+            while (autoSpawnOnStart)
+            {
+                SpawnOnce();
+                await Awaitable.WaitForSecondsAsync(spawnEverySeconds, destroyCancellationToken);
+            }
+        }
+        catch (System.OperationCanceledException) { }
     }
 
-    void SpawnCube()
+    [ContextMenu("Spawn Once")]
+    public void SpawnOnce()
     {
         var offset = new Vector3(
             Random.Range(-spawnRadius, spawnRadius),
@@ -34,8 +40,6 @@ public class PoolTestSpawner : MonoBehaviour
         var cube = Pool.Get("TestCube", transform.position + offset);
         if (cube == null) return;
 
-        lastSpawnTime = Time.time;
-
         if (cube.TryGetComponent(out Rigidbody rb))
         {
             rb.AddForce(new Vector3(Random.Range(-100f, 100f), spawnForce, Random.Range(-100f, 100f)));
@@ -43,5 +47,11 @@ public class PoolTestSpawner : MonoBehaviour
         }
 
         Pool.ReleaseDelayed(cube, releaseDelay);
+    }
+
+    public void SpawnBurst(int count)
+    {
+        for (int i = 0; i < count; i++)
+            SpawnOnce();
     }
 }
