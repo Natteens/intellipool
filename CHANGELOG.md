@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/Natteens/intellipool/compare/v1.0.0...v1.0.1) (2026-08-04)
+
+
+### Bug Fixes
+
+* require Unity version with Awaitable support ([3ab0075](https://github.com/Natteens/intellipool/commit/3ab007555e06cffa2122bdcf14ad0142444725ef))
+
 # [1.0.0](https://github.com/Natteens/intellipool/compare/v0.1.3...v1.0.0) (2026-07-04)
 
 

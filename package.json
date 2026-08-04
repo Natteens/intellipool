@@ -1,6 +1,6 @@
 {
   "name": "com.natteens.intellipool",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "displayName": "IntelliPool",
   "description": "Lightweight GameObject pooling for Unity built on UnityEngine.Pool.ObjectPool, with a ScriptableObject pool database, prewarming, delayed release and editor tooling.",
   "keywords": [
