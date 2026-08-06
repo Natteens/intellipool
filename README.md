@@ -2,53 +2,54 @@
 
 # IntelliPool
 
-**Configure prefab pools in one place, then get and return objects through a small runtime API.**
+**A small GameObject pooling package built on Unity's `ObjectPool<T>`.**
 
-A lightweight GameObject pooling package built on Unity's `ObjectPool<T>`, with an Editor manager,
-prewarming, delayed release and runtime visibility.
+Configure prefab pools in one place, prewarm them when needed, then get and return objects through a
+compact runtime API. IntelliPool adds editor tooling and visibility without replacing Unity's own
+pool implementation.
 
-[![Release](https://img.shields.io/github/v/release/Natteens/intellipool?sort=semver&label=release&style=flat-square)](https://github.com/Natteens/intellipool/releases)
+[![Version](https://img.shields.io/github/v/tag/Natteens/intellipool?sort=semver&label=version&style=flat-square)](https://github.com/Natteens/intellipool/tags)
 [![Unity](https://img.shields.io/badge/Unity-2023.1%2B-000000?style=flat-square&logo=unity)](https://unity.com)
-[![License](https://img.shields.io/github/license/Natteens/intellipool?style=flat-square)](./LICENSE.md)
+[![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](./LICENSE.md)
 
-[Why IntelliPool?](#pooling-without-a-large-runtime) · [Installation](#installation) · [Quick Start](#quick-start) · [Documentation](#documentation)
+[Overview](#why-intellipool) · [Installation](#installation) · [Quick Start](#quick-start) · [Documentation](#documentation)
 
 </div>
 
 ---
 
-## Pooling Without a Large Runtime
+## Why IntelliPool
 
-Object pooling is simple until every prefab invents its own cache, initialization rules and delayed
-return logic. IntelliPool keeps those decisions in a shared database and delegates the actual pool
-behavior to Unity's `ObjectPool<T>`.
+Unity already provides a solid pool implementation. IntelliPool builds around it instead of adding
+another pooling engine.
 
-The result is intentionally small: configure entries in the Pool Manager, request instances through
-`Pool`, and opt into lifecycle callbacks only for objects that need them.
+The package keeps pool configuration in a shared database and gives you one place to manage prefab
+entries, prewarming and capacity. At runtime, the common path stays simple: get an object, use it,
+then return it. Objects only need to implement `IPoolable` when they actually need spawn or release
+callbacks.
 
 <table>
 <tr>
-<td width="50%"><strong>Central pool database</strong><br><sub>Prefab, prewarm and capacity settings remain visible and editable from one asset.</sub></td>
-<td width="50%"><strong>Unity-backed pools</strong><br><sub>The runtime uses `UnityEngine.Pool.ObjectPool<T>` instead of maintaining a parallel pooling engine.</sub></td>
+<td width="50%"><strong>Central pool database</strong><br><sub>Keep prefab, prewarm and capacity settings together in one editable asset.</sub></td>
+<td width="50%"><strong>Unity-backed pools</strong><br><sub>Uses `UnityEngine.Pool.ObjectPool<T>` instead of maintaining a separate pooling engine.</sub></td>
 </tr>
 <tr>
-<td width="50%"><strong>Simple object lifecycle</strong><br><sub>Get, release and delayed release cover the common path without requiring a component-specific pool.</sub></td>
-<td width="50%"><strong>Optional callbacks and stats</strong><br><sub>`IPoolable` and the Pool Manager expose extra lifecycle control only where it is useful.</sub></td>
+<td width="50%"><strong>Simple lifecycle</strong><br><sub>Get, release and delayed release cover the normal path without requiring a pool component on every prefab.</sub></td>
+<td width="50%"><strong>Optional callbacks and stats</strong><br><sub>Use `IPoolable` when an object needs lifecycle hooks, and inspect pool state from the editor manager.</sub></td>
 </tr>
 </table>
 
 ## Installation
 
-Requires Unity **2023.1** or newer. This baseline is required by the Awaitable-based delayed release
-path.
+IntelliPool requires Unity **2023.1** or newer because delayed release uses Unity's Awaitable API.
 
-In the Package Manager, choose **Add package from git URL** and paste:
+In Package Manager, choose **Add package from git URL** and paste:
 
 ```text
 https://github.com/Natteens/intellipool.git
 ```
 
-Or declare it in `Packages/manifest.json`:
+Or add it to `Packages/manifest.json`:
 
 ```json
 {
@@ -58,7 +59,7 @@ Or declare it in `Packages/manifest.json`:
 }
 ```
 
-Pin a release tag when the project needs reproducible pool behavior.
+Append a version tag to the Git URL when you want the project pinned to a specific release.
 
 ## Quick Start
 
@@ -73,15 +74,15 @@ GameObject bullet = Pool.Get("Bullet", muzzle.position, muzzle.rotation);
 Pool.ReleaseDelayed(bullet, 3f);
 ```
 
-Objects that implement `IPoolable` can receive spawn and return callbacks. Everything else can use
-the pool without adopting an additional interface.
+Objects that implement `IPoolable` receive spawn and return callbacks. Other objects can use the
+pool without implementing an extra interface.
 
-A basic sample is available from the Package Manager.
+A basic sample is available from Package Manager.
 
 ## Documentation
 
-Database setup, initialization choices, callbacks, delayed release, capacity rules and performance
-notes are documented in [Documentation](./Documentation~/index.md).
+Database setup, initialization, callbacks, delayed release, capacity rules and performance notes are
+covered in [Documentation](./Documentation~/index.md).
 
 See the [changelog](./CHANGELOG.md) for release history and migration notes.
 
